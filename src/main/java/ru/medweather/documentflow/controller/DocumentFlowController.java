@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.medweather.documentflow.models.Document;
 import ru.medweather.documentflow.models.Firm;
 import ru.medweather.documentflow.repos.DocumentRepos;
+import ru.medweather.documentflow.repos.FirmRepos;
 import ru.medweather.documentflow.service.DocumentFlowService;
 import ru.medweather.documentflow.service.RestrictionService;
 
@@ -22,10 +23,13 @@ public class DocumentFlowController {
 
     private final RestrictionService restrictionService;
 
-    public DocumentFlowController(DocumentRepos documentRepos, DocumentFlowService flowService, RestrictionService restrictionService) {
+    private final FirmRepos firmRepos;
+
+    public DocumentFlowController(DocumentRepos documentRepos, DocumentFlowService flowService, RestrictionService restrictionService, FirmRepos firmRepos) {
         this.documentRepos = documentRepos;
         this.flowService = flowService;
         this.restrictionService = restrictionService;
+        this.firmRepos = firmRepos;
     }
 
     @GetMapping("/")
@@ -50,6 +54,8 @@ public class DocumentFlowController {
     ) {
         flowService.createDocument(author, otherName, document);
         Iterable<Document> documents = documentRepos.findAll();
+        Iterable<Firm> firms = firmRepos.findAll();
+        model.addAttribute("firms", firms);
         model.addAttribute("documents", documents);
         model.addAttribute("restriction", restrictionService.getRestriction());
         return "main";
