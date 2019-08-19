@@ -15,6 +15,13 @@ public class FirmService implements UserDetailsService {
         this.firmRepos = firmRepos;
     }
 
+    /**
+     * Возвращает пользователя
+     *
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return firmRepos.findByUsername(username);

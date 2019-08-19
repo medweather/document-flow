@@ -16,6 +16,13 @@ public class RestrictionController {
         this.restrictionService = restrictionService;
     }
 
+    /**
+     * Период работы СЭД
+     *
+     * @param timeStart
+     * @param timeFinish
+     * @return
+     */
     @PostMapping("/period")
     public String periodFlow(
             @RequestParam int timeStart,
@@ -27,6 +34,13 @@ public class RestrictionController {
         return "redirect:/main";
     }
 
+    /**
+     * Количество документооборотов для одного пользователя
+     *
+     * @param firm
+     * @param countDocFlow
+     * @return
+     */
     @PostMapping("/count-flow")
     public String countFlow(
             @AuthenticationPrincipal Firm firm,
@@ -38,6 +52,13 @@ public class RestrictionController {
         return "redirect:/main";
     }
 
+    /**
+     * Сохранение количества созданных документов за определенный промежуток времени в БД
+     *
+     * @param countCreateDoc
+     * @param periodCreateDoc
+     * @return
+     */
     @PostMapping("/count-create-doc")
     public String countCreateDoc(
             @RequestParam int countCreateDoc,
@@ -47,6 +68,12 @@ public class RestrictionController {
         return "redirect:/main";
     }
 
+    /**
+     * Сохранение количества документооборотов для двух компаний в БД
+     *
+     * @param countFlowBetBothSides
+     * @return
+     */
     @PostMapping("/count-flow-both-sides")
     public String countFlowBothSides(
             @RequestParam int countFlowBetBothSides

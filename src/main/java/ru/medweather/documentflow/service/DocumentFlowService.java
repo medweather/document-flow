@@ -24,6 +24,13 @@ public class DocumentFlowService implements DocumentFlow {
         this.firmRepos = firmRepos;
     }
 
+    /**
+     * Создание документа
+     *
+     * @param author
+     * @param otherName
+     * @param document
+     */
     @Override
     public void createDocument(Firm author, String otherName, Document document) {
         document.setAuthor(author);
@@ -31,6 +38,12 @@ public class DocumentFlowService implements DocumentFlow {
         documentRepos.save(document);
     }
 
+    /**
+     * Добавление документа в СЭД
+     *
+     * @param id
+     * @param author
+     */
     @Override
     public void addDocument(int id, Firm author) {
         Document document = documentRepos.findById(id);
@@ -41,6 +54,12 @@ public class DocumentFlowService implements DocumentFlow {
 
     }
 
+    /**
+     * Удаление документа
+     *
+     * @param id
+     * @param firm
+     */
     @Override
     public void deleteDocument(int id, Firm firm) {
         Document document = documentRepos.findById(id);
@@ -48,6 +67,14 @@ public class DocumentFlowService implements DocumentFlow {
         documentRepos.delete(document);
     }
 
+    /**
+     * Редактирование документа
+     *
+     * @param id
+     * @param title
+     * @param about
+     * @param author
+     */
     @Override
     public void editDocument(int id, String title, String about, Firm author) {
         Document document = documentRepos.findById(id);
@@ -64,6 +91,12 @@ public class DocumentFlowService implements DocumentFlow {
 
     }
 
+    /**
+     * Подписание документа и отправка другой стороне
+     *
+     * @param id
+     * @param firm
+     */
     @Override
     public void signDocument(int id, Firm firm) {
         Document document = documentRepos.findById(id);
@@ -78,11 +111,22 @@ public class DocumentFlowService implements DocumentFlow {
         documentRepos.save(document);
     }
 
+    /**
+     * Список добавленных документов в СЭД
+     *
+     * @return
+     */
     @Override
     public Set<Document> getDocuments() {
         return documents;
     }
 
+    /**
+     * Список добавленных документов текущего пользователя
+     *
+     * @param currentUser
+     * @return
+     */
     public Set<Document> getDocumentsCurrentUser(Firm currentUser) {
         return firmRepos.findByUsername(currentUser.getUsername()).getDocuments();
     }
