@@ -88,7 +88,6 @@ public class DocumentFlowService implements DocumentFlow {
         document.setAbout(about);
         documentRepos.save(document);
         getDocumentsCurrentUser(author).add(document);
-
     }
 
     /**

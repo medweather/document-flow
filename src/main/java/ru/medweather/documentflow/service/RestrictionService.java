@@ -1,7 +1,6 @@
 package ru.medweather.documentflow.service;
 
 import org.springframework.stereotype.Service;
-import ru.medweather.documentflow.models.Document;
 import ru.medweather.documentflow.models.Firm;
 import ru.medweather.documentflow.models.Restriction;
 import ru.medweather.documentflow.repos.DocumentRepos;
@@ -9,10 +8,6 @@ import ru.medweather.documentflow.repos.FirmRepos;
 import ru.medweather.documentflow.repos.RestrictionRepos;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.List;
 
 @Service
 public class RestrictionService {
@@ -73,9 +68,6 @@ public class RestrictionService {
      */
     public boolean isCreateDocument(Firm firm, int count, int hours) {
         Restriction restriction = restrictionRepos.findById(1);
-        Iterable<Document> documents = documentRepos.findAll();
-        LocalTime now = LocalTime.now();
-        LocalTime after = now.plusHours(restriction.getPeriodCreateDoc());
         //TODO сделать промежуток времени в течение которого создается определенное количество документов
         return true;
     }
@@ -90,21 +82,6 @@ public class RestrictionService {
      */
     public boolean isDocFlowBetweenBothSides(Firm firm, String otherName) {
         Restriction restriction = restrictionRepos.findById(1);
-        Firm other = firmRepos.findByName(otherName);
-        List<Document> docs = new ArrayList<>();
-        try {
-            Iterator<Document> it = documentRepos.findAll().iterator();
-            while (it.hasNext()) {
-                Document doc = it.next();
-                if((firm.equals(doc.getAuthor()) && other.equals(doc.getOtherSide()))
-                        || (firm.equals(doc.getOtherSide()) && other.equals(doc.getAuthor()))) {
-                    docs.add(doc);
-                }
-            }
-        }
-        catch (ConcurrentModificationException cme) {
-            cme.getMessage();
-        }
         //TODO доделать ограничение по ведению документооборота между двумя компаниями
         return true;
     }

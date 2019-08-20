@@ -24,6 +24,8 @@ public class FirmService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        if (firmRepos.findByUsername(username) == null)
+           throw new UsernameNotFoundException("No firm found with username: " + username);
         return firmRepos.findByUsername(username);
     }
 }
