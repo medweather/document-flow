@@ -32,7 +32,7 @@ public class DocumentFlowServiceTest {
     public void createDocument() {
         Firm author = new Firm();
         Firm firm = new Firm();
-        String otherName = "НПАО \"Рыбачок\"";
+        String otherName = "Sony";
         firm.setName(otherName);
         Document document = new Document();
 

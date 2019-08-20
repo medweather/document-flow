@@ -28,7 +28,6 @@ public class FirmServiceTest {
     public void loadUserByUsername() {
         Firm firm = new Firm();
         firm .setUsername("hogwarts");
-        UserDetails userDetails = firm;
 
         Mockito.doReturn(firm)
                 .when(firmRepos)
@@ -36,17 +35,16 @@ public class FirmServiceTest {
 
         UserDetails userDetailsResult = firmService.loadUserByUsername(firm.getUsername());
 
-        assertEquals(userDetailsResult, userDetails);
+        assertEquals(userDetailsResult, firm);
     }
 
     @Test(expected = UsernameNotFoundException.class)
     public void loadUserByUsernameNull() {
         Firm firm = new Firm();
         firm .setUsername("hogwarts");
-        UserDetails userDetails = firm;
 
         UserDetails userDetailsResult = firmService.loadUserByUsername(firm.getUsername());
 
-        assertEquals(userDetailsResult, userDetails);
+        assertEquals(userDetailsResult, firm);
     }
 }

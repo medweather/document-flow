@@ -3,7 +3,6 @@ package ru.medweather.documentflow.service;
 import org.springframework.stereotype.Service;
 import ru.medweather.documentflow.models.Firm;
 import ru.medweather.documentflow.models.Restriction;
-import ru.medweather.documentflow.repos.DocumentRepos;
 import ru.medweather.documentflow.repos.FirmRepos;
 import ru.medweather.documentflow.repos.RestrictionRepos;
 
@@ -16,12 +15,9 @@ public class RestrictionService {
 
     private final FirmRepos firmRepos;
 
-    private final DocumentRepos documentRepos;
-
-    public RestrictionService(RestrictionRepos restrictionRepos, DocumentFlowService flowService, FirmRepos firmRepos, DocumentRepos documentRepos) {
+    public RestrictionService(RestrictionRepos restrictionRepos, FirmRepos firmRepos) {
         this.restrictionRepos = restrictionRepos;
         this.firmRepos = firmRepos;
-        this.documentRepos = documentRepos;
     }
 
     /**

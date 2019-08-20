@@ -9,9 +9,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.medweather.documentflow.models.Firm;
 import ru.medweather.documentflow.models.Restriction;
-import ru.medweather.documentflow.repos.DocumentRepos;
 import ru.medweather.documentflow.repos.FirmRepos;
 import ru.medweather.documentflow.repos.RestrictionRepos;
+
+import java.time.LocalTime;
 
 import static org.junit.Assert.*;
 
@@ -27,9 +28,6 @@ public class RestrictionServiceTest {
     @MockBean
     private FirmRepos firmRepos;
 
-    @MockBean
-    private DocumentRepos documentRepos;
-
     @Test
     public void isPeriodDocumentFlow() {
         int timeStart = 12;
@@ -43,7 +41,12 @@ public class RestrictionServiceTest {
 
         boolean pdf = restrictionService.isPeriodDocumentFlow(timeStart, timeFinish);
 
-        assertTrue(pdf);
+        if (LocalTime.now().isBefore(LocalTime.of(timeStart, 0))
+                || LocalTime.now().isAfter(LocalTime.of(timeFinish, 0))) {
+            assertFalse(pdf);
+        } else {
+            assertTrue(pdf);
+        }
         assertEquals(restriction.getTimeFinish(), timeFinish);
         assertEquals(restriction.getTimeStart(), timeStart);
         Mockito.verify(restrictionRepos, Mockito.times(1)).save(restriction);
@@ -62,7 +65,12 @@ public class RestrictionServiceTest {
 
         boolean pdf = restrictionService.isPeriodDocumentFlow(timeStart, timeFinish);
 
-        assertFalse(pdf);
+        if (LocalTime.now().isBefore(LocalTime.of(timeStart, 0))
+                || LocalTime.now().isAfter(LocalTime.of(timeFinish, 0))) {
+            assertFalse(pdf);
+        } else {
+            assertTrue(pdf);
+        }
         assertEquals(restriction.getTimeFinish(), timeFinish);
         assertEquals(restriction.getTimeStart(), timeStart);
         Mockito.verify(restrictionRepos, Mockito.times(1)).save(restriction);

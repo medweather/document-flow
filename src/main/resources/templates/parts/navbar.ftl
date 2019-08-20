@@ -11,7 +11,7 @@
         <ul class="navbar-nav mr-auto">
             <#if firm??>
             <li class="nav-item">
-                <a class="nav-link" href="/main">Documents</a>
+                <a class="nav-link" href="/main">Main</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/documentFlow">Document management system</a>
