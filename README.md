@@ -2,13 +2,13 @@
 ---
 Для запуска приложения и соединения с БД замените значения полей:
 ---
-  'spring.datasource.username',
+* 'spring.datasource.username',
   ---
-  'spring.datasource.password',
+* 'spring.datasource.password',
   ---
-  'spring.flyway.user',
+* 'spring.flyway.user',
   ---
-  'spring.flyway.password' на ваши соответствующие пользовательские данные.
+* 'spring.flyway.password' **на ваши соответствующие пользовательские данные.**
 ---
 Для входа в систему используйте ниже приведенные данные на странице '/login'
 ---
